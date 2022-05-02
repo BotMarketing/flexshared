@@ -471,7 +471,7 @@
         })
       })
 
-      // if (liff.isInClient()) {
+       if (liff.isInClient() || liff.getContext().type == 'square_chat') {
         $('.send-flex').click(function () {
           let button = $(this)
           let id = $(this).closest('.col-md-4').find('.delete-list').attr('id')
@@ -480,9 +480,9 @@
           let flex = JSON.parse(flextext)
           sendInChat(flex)
         })
-      // } else {
-        //                 $('.send-flex').hide()
-      // }
+      } else {
+        $('.send-flex').hide()
+      }
       $('.shared-flex').click(function () {
         let button = $(this)
         let id = $(this).closest('.col-md-4').find('.delete-list').attr('id')
