@@ -156,9 +156,9 @@
                 $('#input-sec').slideDown(200);
                 profile = await liff.getProfile();
                 $('#displayName').html(profile.displayName);
-                if (liff.isInClient()) {
+               // if (liff.isInClient()) {
                     $('#send').slideDown(200);
-                }
+               // }
                 getFlex()
             } else {
                 $.LoadingOverlay("hide");
@@ -473,7 +473,7 @@
                     sendInChat(flex)
                 })
             } else {
-                $('.send-flex').hide()
+//                 $('.send-flex').hide()
             }
             $('.shared-flex').click(function () {
                 let button = $(this)
