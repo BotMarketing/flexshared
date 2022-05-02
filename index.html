@@ -180,34 +180,32 @@
                 $('.modal').modal('show');
             }
         })
-        $('#shared').click(function () {
-            var flex = getJSON()
-            
-            if (flex) {
-                  if (JSON.stringify(flex).indexOf('{{sharedFlex}}') > -1) {
-        Swal.fire({
-          icon: 'error',
-          title: 'หากกำหนดให้มีคีย์เวิร์ด sharedFlex คุณจำเป็นที่จะต้องบันทึก Flex นี้ก่อนการแชร์',
-        })
-           return false
+       $('#shared').click(function () {
+      var flex = getJSON()
+      if (flex) {
+        if (JSON.stringify(flex).indexOf('{{sharedFlex}}') > -1) {
+          Swal.fire({
+            icon: 'error',
+            title: 'หากกำหนดให้มีคีย์เวิร์ด sharedFlex คุณจำเป็นที่จะต้องบันทึก Flex นี้ก่อนการแชร์',
+          })
+          return false
+        }
+        sendShare(flex);
       }
-                sendShare(flex);
-            }
-        })
-        $('#send').click(function () {
-            var flex = getJSON()
-            if (flex) {
-                  if (flex) {
-                  if (JSON.stringify(flex).indexOf('{{sharedFlex}}') > -1) {
-        Swal.fire({
-          icon: 'error',
-          title: 'หากกำหนดให้มีคีย์เวิร์ด sharedFlex คุณจำเป็นที่จะต้องบันทึก Flex นี้ก่อนการแชร์',
-        })
-           return false
+    })
+    $('#send').click(function () {
+      var flex = getJSON()
+      if (flex) {
+        if (JSON.stringify(flex).indexOf('{{sharedFlex}}') > -1) {
+          Swal.fire({
+            icon: 'error',
+            title: 'หากกำหนดให้มีคีย์เวิร์ด sharedFlex คุณจำเป็นที่จะต้องบันทึก Flex นี้ก่อนการแชร์',
+          })
+          return false
+        }
+        sendInChat(flex);
       }
-                sendInChat(flex);
-            }
-        })
+    })
         $('#save').click(function () {
             let flex = getJSON()
             if (flex) {
