@@ -307,10 +307,11 @@
         function getJSON() {
             let json = $('#json').val()
        if (json.indexOf('{{sharedFlex}}')) {
-        return Swal.fire({
+        Swal.fire({
           icon: 'error',
           title: 'หากกำหนดให้มีคีย์เวิร์ด sharedFlex คุณจำเป็นที่จะต้องบันทึก Flex นี้ก่อนการแชร์',
         })
+           return false
       }
             try {
                 json = JSON.parse($('#json').val())
