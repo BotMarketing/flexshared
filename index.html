@@ -110,11 +110,6 @@
     </div>
   </section>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
-<script>
-  // VConsole will be exported to `window.VConsole` by default.
-  var vConsole = new window.VConsole();
-</script>
   <script>
     var Toast
     $(document).ready(() => {
@@ -151,7 +146,7 @@
     }
   </script>
   <script>
-    var profile={}, flexlist
+    var profile, flexlist
     var scripturl = 'https://script.google.com/macros/s/AKfycbyreWADtQ75TLzzUwnCafG4MLXFZN2K_Afnx3fhQX-yY_8VhWYCEOoC5cqu7Bxj42Yciw/exec'
     async function main() {
       await liff.init({ liffId: '1657102810-EKzDpJwy' });
@@ -159,9 +154,9 @@
         $.LoadingOverlay("hide");
         $('#login-sec').removeClass('d-flex').hide();
         $('#input-sec').slideDown(200);
- let context = await liff.getContext()
+        let context = await liff.getContext()
         if (context.type == 'square_chat') {
-          profile = { displayName: 'openchat', userId: context.squareMemberId }
+          profile = { displayName: 'openchat', userId: context.squareMemberId, isSquare: true }
         } else profile = await liff.getProfile();
         $('#displayName').html(profile.displayName);
         if (liff.isInClient() || liff.getContext().type === 'square_chat') {
@@ -229,6 +224,7 @@
           preConfirm: (templateName) => {
             return $.post(scripturl, {
               q: 'put',
+              isSquare: profile.isSquare,
               name: templateName,
               flex: JSON.stringify(flex),
               uid: profile.userId
@@ -287,6 +283,7 @@
         Swal.showLoading(Swal.getConfirmButton());
         $.post(scripturl, {
           q: 'update',
+          isSquare: profile.isSquare,
           id: id,
           flex: JSON.stringify(flex),
         }, function (output) {
@@ -309,6 +306,7 @@
       let uid = profile.userId;
       $.post(scripturl, {
         q: 'get',
+        isSquare: profile.isSquare,
         uid: uid
       }, function (result) {
         flexlist = result.data
@@ -448,6 +446,7 @@
             Swal.showLoading(Swal.getConfirmButton())
             $.post(scripturl, {
               q: 'delete',
+              isSquare: profile.isSquare,
               id: $(this).attr('id')
             }, function (result) {
               if (result.result == 'success') {
@@ -471,7 +470,7 @@
         })
       })
 
-       if (liff.isInClient() || liff.getContext().type == 'square_chat') {
+      if (liff.isInClient() || liff.getContext().type == 'square_chat') {
         $('.send-flex').click(function () {
           let button = $(this)
           let id = $(this).closest('.col-md-4').find('.delete-list').attr('id')
