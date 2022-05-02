@@ -159,13 +159,14 @@
         $.LoadingOverlay("hide");
         $('#login-sec').removeClass('d-flex').hide();
         $('#input-sec').slideDown(200);
-        const context = liff.getContext()
-        console.log(context)
-//         profile = await liff.getProfile();
-       // $('#displayName').html(profile.displayName);
-        // if (liff.isInClient()) {
-        $('#send').slideDown(200);
-        // }
+ let context = await liff.getContext()
+        if (context.type == 'square_chat') {
+          profile = { displayName: 'openchat', userId: context.squareMemberId }
+        } else profile = await liff.getProfile();
+        $('#displayName').html(profile.displayName);
+        if (liff.isInClient() || liff.getContext().type === 'square_chat') {
+          $('#send').slideDown(200);
+        }
         getFlex()
       } else {
         $.LoadingOverlay("hide");
