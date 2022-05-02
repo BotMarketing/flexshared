@@ -159,7 +159,8 @@
         $.LoadingOverlay("hide");
         $('#login-sec').removeClass('d-flex').hide();
         $('#input-sec').slideDown(200);
-        console.log(liff.getDecodeIDToken())
+        const context = liff.getContext()
+        console.log(context)
 //         profile = await liff.getProfile();
        // $('#displayName').html(profile.displayName);
         // if (liff.isInClient()) {
