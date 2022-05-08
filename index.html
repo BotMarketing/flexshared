@@ -109,7 +109,7 @@
             </div>
         </div>
     </section>
-    <script src="https://static.line-scdn.net/liff/edge/versions/2.19.0/sdk.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
         var Toast
         $(document).ready(() => {
@@ -150,29 +150,27 @@
         var scripturl = 'https://script.google.com/macros/s/AKfycbyreWADtQ75TLzzUwnCafG4MLXFZN2K_Afnx3fhQX-yY_8VhWYCEOoC5cqu7Bxj42Yciw/exec'
         async function main() {
             await liff.init({ liffId: '1657102810-EKzDpJwy' });
-            liff.ready.then(async () => {
-                console.log('login', liff.isLoggedIn());
-                if (liff.isLoggedIn()) {
-                    $.LoadingOverlay("hide");
-                    $('#login-sec').removeClass('d-flex').hide();
-                    $('#input-sec').slideDown(200);
-                    let context = await liff.getContext()
-                    if (context.type == 'square_chat') {
-                        profile = { displayName: 'openchat', userId: context.squareMemberId, isSquare: true }
-                    } else profile = await liff.getProfile();
-                    $('#displayName').html(profile.displayName);
-                    if (liff.isInClient() || liff.getContext().type === 'square_chat') {
-                        $('#send').slideDown(200);
-                    }
-                    getFlex()
-                } else {
-                    $.LoadingOverlay("hide");
-                    $('#login-sec div').slideDown(200);
-                    $('#login-btn').click(function () {
-                        return liff.login();
-                    })
+            console.log('login', liff.isLoggedIn());
+            if (liff.isLoggedIn()) {
+                $.LoadingOverlay("hide");
+                $('#login-sec').removeClass('d-flex').hide();
+                $('#input-sec').slideDown(200);
+                let context = await liff.getContext()
+                if (context.type == 'square_chat') {
+                    profile = { displayName: 'openchat', userId: context.squareMemberId, isSquare: true }
+                } else profile = await liff.getProfile();
+                $('#displayName').html(profile.displayName);
+                if (liff.isInClient() || liff.getContext().type === 'square_chat') {
+                    $('#send').slideDown(200);
                 }
-            })
+                getFlex()
+            } else {
+                $.LoadingOverlay("hide");
+                $('#login-sec div').slideDown(200);
+                $('#login-btn').click(function () {
+                    return liff.login();
+                })
+            }
         }
         main();
             // getFlex()
