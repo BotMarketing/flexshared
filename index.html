@@ -150,6 +150,7 @@
     var scripturl = 'https://script.google.com/macros/s/AKfycbyreWADtQ75TLzzUwnCafG4MLXFZN2K_Afnx3fhQX-yY_8VhWYCEOoC5cqu7Bxj42Yciw/exec'
     async function main() {
       await liff.init({ liffId: '1657102810-EKzDpJwy' });
+      console.log('login', liff.isLoggedIn());
       if (liff.isLoggedIn()) {
         $.LoadingOverlay("hide");
         $('#login-sec').removeClass('d-flex').hide();
